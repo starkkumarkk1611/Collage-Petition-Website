@@ -88,7 +88,7 @@ html(lang="en")
 
                     })
                 .catch((error) => {
-                    console.error("Error adding document: ", error);
+                    console.error("Error adding document: ", JSON.stringify(error));
                 });
 
                 function store_user_ptn(link,id)
