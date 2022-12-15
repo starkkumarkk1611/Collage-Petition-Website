@@ -1,0 +1,20 @@
+{
+  "name": "cwk",
+  "version": "1.0.0",
+  "description": "this is pakage we created while learning ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kundan",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "csurf": "^1.11.0",
+    "express": "^4.17.1",
+    "firebase": "^8.2.10",
+    "firebase-admin": "^9.5.0",
+    "pug": "^3.0.2"
+  }
+}

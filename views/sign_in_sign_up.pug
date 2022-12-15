@@ -1,0 +1,208 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title #{title}
+        style 
+            include ../static/signinfirst.css
+        script(src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js") 
+        script(src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js") 
+        script(src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js") 
+    body    
+        header 
+            nav 
+                .logo 
+                    h4 ISMpetition 
+                    p Every Voice Matters 
+        section 
+                .signin 
+                    <form id="signin" >
+                    <div class="container">
+                        <h1>Sign In</h1>
+                        <hr>
+                        <label for="email"><b>Email</b></label>
+                        <input type="text" placeholder="Enter Email" name="email" required>
+                        <label for="psw"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="password" required>
+                        <label>
+                        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+                        </label>
+                        <div class="clearfix">
+                        <button type="submit" class="signupbtn">Sign In</button>
+                        </div>
+                    </div>
+                    </form>
+                    <button id="SigninGoogle" onclick="sign_with_google()"> <img width="15px" style="margin-bottom:3px; margin-right:5px" alt="Google login" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+                    |  Sign in with Google 
+                    </button>
+
+                .signup 
+                    <form id="signup" >
+                    <div class="container">
+                        <h1>Sign Up</h1>
+                        <p>Please fill in this form to create an account.</p>
+                        <hr>
+                        <label for="email"><b>Email</b></label>
+                        <input type="text" placeholder="Enter Email" name="email" required>
+                        <label for="psw"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" id="psw" name="psw" required>
+                        <label for="psw-repeat"><b>Repeat Password</b></label>
+                        <input type="password" placeholder="Repeat Password" id ="psw_repeat" name="psw_repeat" required>
+                        <label>
+                        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+                        </label>
+                        <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+                        <div class="clearfix">
+                        <button type="submit"  class="signupbtn">Sign Up</button>
+                        </div>
+                    </div>
+                    </form>
+
+    script.
+          const firebaseConfig = {
+              apiKey: "AIzaSyA1zibnPZl4ocIwVHMDFg3Hs7-VzXjDtSU",
+              authDomain: "ismpetition-c42af.firebaseapp.com",
+              projectId: "ismpetition-c42af",
+              storageBucket: "ismpetition-c42af.appspot.com",
+              messagingSenderId: "523773171656",
+              appId: "1:523773171656:web:790c1724b9ff0f854012fd",
+              measurementId: "G-WM9JHM9N7Y"
+          };
+
+          firebase.initializeApp(firebaseConfig);
+
+          firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+
+          document
+            .getElementById("signin")
+            .addEventListener("submit", (event) => {
+              event.preventDefault();
+              const email = event.target.email.value;
+              const password = event.target.password.value;
+              firebase
+                .auth()
+                .signInWithEmailAndPassword(email, password)
+                .then(({ user }) => {
+                  return user.getIdToken().then((idToken) => {
+                    return fetch("/sessionLogin", {
+                      method: "POST",
+                      headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+                      },
+                      body: JSON.stringify({ idToken }),
+                    });
+                  });
+                })
+                .then(() => {
+                  return firebase.auth().signOut();
+                })
+                .then(() => {
+                  window.location.assign("/home");
+                }).catch((error) => {
+                        // Handle Errors here.
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        // The email of the user's account used.
+                        var email = error.email;
+                        // The firebase.auth.AuthCredential type that was used.
+                        var credential = error.credential;
+                        // ...
+                        window.alert(errorMessage);
+                    });
+              return false;
+            });
+
+
+          document
+          .getElementById("signup")
+          .addEventListener("submit", (event) => {
+            event.preventDefault();
+            const email = event.target.email.value;
+            const password = event.target.psw.value;
+            const pswr= event.target.psw_repeat.value;
+            if(password != pswr)
+            {
+              window.alert(" Repeated Password Must be same as Password"); 
+              document.getElementById("psw_repeat").focus(); 
+              return false; 
+            }
+
+            firebase
+              .auth()
+              .createUserWithEmailAndPassword(email, password)
+              .then(({ user }) => {
+                return user.getIdToken().then((idToken) => {
+                  return fetch("/sessionLogin", {
+                    method: "POST",
+                    headers: {
+                      Accept: "application/json",
+                      "Content-Type": "application/json",
+                      "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+                    },
+                    body: JSON.stringify({ idToken }),
+                  });
+                });
+              })
+              .then(() => {
+                return firebase.auth().signOut();
+              })
+              .then(() => {
+                window.location.assign("/home");
+              }).catch((error) => {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // The email of the user's account used.
+                    var email = error.email;
+                    // The firebase.auth.AuthCredential type that was used.
+                    var credential = error.credential;
+                    window.alert(errorMessage);
+                    // ...
+                });
+            
+            return false;
+           
+          });
+
+          function sign_with_google(){
+              var provider = new firebase.auth.GoogleAuthProvider();
+            firebase
+                .auth()
+                .signInWithPopup(provider)
+                .then(({ user }) => {
+                  return user.getIdToken().then((idToken) => {
+                    return fetch("/sessionLogin", {
+                      method: "POST",
+                      headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+                      },
+                      body: JSON.stringify({ idToken }),
+                    });
+                  });
+                })
+                .then(() => {
+                  return firebase.auth().signOut();
+                })
+                .then(() => {
+                  window.location.assign("/home");
+                }).catch((error) => {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // The email of the user's account used.
+                    var email = error.email;
+                    // The firebase.auth.AuthCredential type that was used.
+                    var credential = error.credential;
+                    window.alert(errorMessage);
+                    // ...
+                });
+          }
+
+        
+      

@@ -1,0 +1,117 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title #{title}
+        style 
+            include ../static/preview.css
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+    body 
+        .main
+            header 
+                nav 
+                    .logo 
+                        h4 ISMpetition 
+                        p Every Voice Matters 
+                    .userinfo#userinfo
+                        p#email #{email} 
+                        button#signout(onclick="window.location.href='/sessionLogout'") Sign Out 
+            section 
+                #petition_pre.petition_pre    
+                    div#petitionTitle #{petitionTitle}
+
+                    div#reciptent Petition to: #{reciptent}
+                    div#petition_by Petition by: #{email}
+
+                    div#description #{description}
+                    
+                    button#save_publish(onclick='submit_petition()') Save and Publish
+                    #link_to_ptn 
+
+        
+        script(src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js") 
+        script(src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js") 
+        script 
+            include ../static/firebaseConfig.js 
+        script.
+            var input = document.getElementById('description').innerHTML;
+            function htmlDecode(input){
+            var e = document.createElement('div');
+            e.innerHTML = input;
+            return e.childNodes[0].nodeValue;
+            }
+            
+            document.getElementById('description').innerHTML = htmlDecode(input);
+            
+        script.
+            function copyToClipboard(element) {
+                var $temp = $("<input>");
+                $("body").append($temp);
+                $temp.val($(element).text()).select();
+                document.execCommand("copy");
+                $temp.remove();
+                var link =  document.getElementById('link_to_ptn').innerHTML;
+                document.getElementById('link_to_ptn').innerHTML = "--Copied--";
+                setTimeout(() => {  document.getElementById('link_to_ptn').innerHTML = link; }, 1000);
+              
+                
+            }
+
+            function submit_petition()
+            {
+                var petition_by  = document.getElementById('email').innerHTML;
+                var petitionTitle = document.getElementById('petitionTitle').innerHTML;
+                var reciptent = document.getElementById('reciptent').innerHTML.substr(12);
+                var description = document.getElementById('description').innerHTML
+                
+                // Add a second document with a generated ID.
+                db.collection("Petition").add({
+                    petition_by : petition_by,
+                    petitionTitle: petitionTitle,
+                    reciptent: reciptent,
+                    description: description,
+                    signed_by: []
+                })
+                .then((docRef) => {
+                    console.log("Document written with ID: ", docRef.id);
+                    document.getElementById("save_publish").innerHTML = "Click To Copy Link Share Petition";
+                    document.getElementById("save_publish").setAttribute('onclick',"copyToClipboard('#link_to_ptn')");
+                    //creating link to petition
+                    var link = window.location.protocol + window.location.host  + "/petition/?id=" + docRef.id ;
+                    var id = docRef.id;   
+                    var link_to_ptn = document.getElementById('link_to_ptn');
+                    link_to_ptn.innerHTML =  link    
+                    link_to_ptn.style.display = 'block';
+                    store_user_ptn(link,id);
+
+                    })
+                .catch((error) => {
+                    console.error("Error adding document: ", error);
+                });
+
+                function store_user_ptn(link,id)
+                {
+                     
+                    link_ptn_div= "<div class=\"link\"> <button class=\"copy_link\" onclick =\"copyToClipboard('" +"#"+id +"')\"> Copy</button>" + "<div class=\"link_to_ptn\" id=\""+   id + "\">" + link  + "</div></div>"  ;
+                   
+                    var user  =  document.getElementById('email').innerHTML;
+                 
+                  
+                        // Add a new document in collection "cities"
+                    db.collection("UsersData").doc(user).set({
+                        petition_filed : firebase.firestore.FieldValue.arrayUnion(link_ptn_div)
+
+
+                    },{ merge: true })
+                    .then(() => {
+                        console.log("Document successfully written!");
+                    })
+                    .catch((error) => {
+                        console.error("Error writing document: ", error);
+                    });
+                
+                }
+
+            }

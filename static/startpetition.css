@@ -1,0 +1,179 @@
+html,
+body {
+	/*        	border: 2px solid blue;*/
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+    color: white;
+
+
+}
+.main {
+	/*        	border: 2px solid black;*/
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: white;
+	opacity: 0.899;
+}
+
+header {
+	width: 100%;
+    
+}
+
+header::before {
+	background: url(/static/judge.jpg) repeat center center/cover;
+	content: "";
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	opacity: 0.7;
+
+/*            border: 2px solid red;*/
+}
+
+nav {
+	display: flex;
+		/*border: 2px solid red;*/
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 0;
+	padding: 0;
+	border-bottom: 2px solid #87fe39;
+}
+
+.logo p {
+	margin: 7px;
+	padding: 0 8px;
+	color:white;
+	flex-basis: 300px;
+    font-size: 1.6rem;
+
+}
+
+.logo h4 {
+
+	font-weight: bolder;
+	font-size: 2.4rem;
+	margin: 7px;
+	padding: 0 8px;
+	color: #87fe39;
+	flex-basis: 300px;
+
+}
+.userinfo{
+    /*border: 2px solid red;*/
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+}
+
+.userinfo p{
+   /* border: 2px solid red;*/
+    margin: 4px;
+    align-items: center;
+    align-self: center;
+    font-size: 1.9rem;
+    font-weight: bold;
+}
+
+.userinfo #signout{
+   border: 2px solid #87fe39;
+    
+
+	display: block;
+	height: 30px;
+	align-self: center;
+	margin: 3px;
+	height: 3rem;
+	width: 9rem;
+	padding: 0;
+	margin-right: 4px;
+	border-radius: 5px;
+	background: #87fe39;
+	color: black;
+    font-size: 1.35rem;
+}
+.userinfo #signout:hover{
+    background: black;
+	border: 2.5px solid;
+	color: #87fe39;
+	border-color: #87fe39;
+	cursor: pointer;
+}
+section, #petitionform{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	
+}
+.leftinfo{
+	
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+}
+.leftinfo h2{
+
+	font-size: 2.5rem;
+	text-align: center;
+	color: #87fe39;
+}
+.leftinfo p{
+	
+	font-size: 1.5rem;
+	text-align: center;
+	width: 80%;
+}
+.leftinfo input{
+	margin-bottom: 1rem;
+	
+	
+	width: 90%;
+	height: 2rem;
+}
+
+.editor{
+	height: 200px;
+	width: 90%;
+	margin-bottom: 1rem;
+	
+	
+}
+.part{
+	display: grid;
+	grid-template-columns: 50% 50%;
+	border-bottom: 2px solid #87fe39;
+	width: 98%;
+}
+.rightinfo{
+	position: relative;
+	
+}
+#preview{
+	position: absolute;
+    top: 80%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+	height: 3rem;
+	width: 60%;
+	font-size: 2rem;
+	background-color: #87fe39;
+	border: none;
+	opacity: 0.8;
+
+	
+}
+#preview:hover{
+	opacity: 1;
+}
+

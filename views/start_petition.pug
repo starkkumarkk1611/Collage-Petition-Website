@@ -1,0 +1,76 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title #{title}
+        strong
+            script(src='https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js' referrerpolicy='origin')
+        script.
+        script 
+            include ../static/tinymice.js
+        style 
+            include ../static/startpetition.css
+    body 
+        .main
+            header 
+                nav 
+                    .logo 
+                        h4 ISMpetition 
+                        p Every Voice Matters 
+                    .userinfo 
+                        p #{email} 
+                        button#signout(onclick="window.location.href='/sessionLogout'") Sign Out
+            section
+                form#petitionform(action="/preview", method="get") 
+                    .part
+                        div.leftinfo
+                            <h2 class = "headtitle"> Write your petition title </h2>
+                            p This is the first thing people will see about your petition. Get their attention with a short title that focusses on the change you’d like them to support.
+                            input#titlebox(type="text", name="petitionTitle" required)
+                        div.rightinfo    
+                            <h3> Keep it short and to the point</h3> 
+                            <br> Example: "Buy organic, free-range eggs for your restaurants"
+                            <br> Not: "Stop the inhumane treatment of chickens in battery farms that are force-fed..."
+                            <br> 
+                            <h3>  Focus on the solution</h3>
+                            <br>  Example: "Raise the minimum wage in to 300₹ a day"
+                            <br>  Not: "Stop rising income inequality"
+                            <br>
+                            <h3> Communicate urgency</h3>
+                            <br> Example: "Approve life-saving medication for my daughter's insurance before it’s too late" 
+                    .part 
+                        div.leftinfo
+                            <h2 class = "headtitle">Who has the power to make this change? </h2>
+                            p  These are people or organisations with the power to solve your problem or take the action you’re demanding. Give emails of those recipient(s) of your petition.
+                            input#reciptentbox(type="text", name="reciptent" required)
+                        div.rightinfo    
+                            <h3> Many petitions have companies or businesses as targets</h3> 
+                            <br> Examples: “Microsoft” or “Divya’s Beauty Salon”. Feel free to also list the CEO or another company official.
+                            <br> 
+                            <h3> Politicians, legislatures, or government agencies are also common</h3>
+                            <br>  Examples: “Mumbai City Council”, your Sabha representative’s name, or the Ministry of Health and Family Welfare.
+                            <br>
+                            <h3> Don’t overthink it</h3>
+                            <br> You can add or change targets later. For now, just make your best guess and write the rest of your petition!
+                    .part     
+                        div.leftinfo
+                            <h2 class = "headtitle">Explain the problem you want to solve </h2>
+                            p People are more likely to support your petition if it’s clear why you care. Explain how this change will impact you, your family, or your community.
+                            .editor    
+                                textarea#description(name="description", cols="50", rows="10" required) 
+                        div.rightinfo    
+                            <h3>Describe the people involved and the problem they are facing</h3> 
+                            <br> Readers are most likely to take action when they understand who is affected. 
+                            <br> 
+                            <h3> Describe the solution</h3>
+                            <br>  Explain what needs to happen and who can make the change. Make it clear what happens if you win or lose.
+                            <br>
+                            <h3> Make it personal</h3>
+                            <br> Readers are more likely to sign and support your petition if it’s clear why you care.
+                            <br>
+                            <h3> Respect others</h3>
+                            <br> Don't bully, use hate speech, threaten violence or make things up.
+                            button#preview(type="submit") Preview
+                            

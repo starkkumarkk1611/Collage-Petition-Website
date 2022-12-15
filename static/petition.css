@@ -1,0 +1,307 @@
+html,
+body {
+	/*        	border: 2px solid blue;*/
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+    color: white;
+
+
+}
+.main {
+	/*        	border: 2px solid black;*/
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	color: white;
+	opacity: 0.899;
+}
+
+header {
+	width: 100%;
+    
+}
+
+header::before {
+	background: url(/static/judge.jpg) repeat center center/cover;
+	content: "";
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	opacity: 0.7;
+
+/*            border: 2px solid red;*/
+}
+
+nav {
+	display: flex;
+		/*border: 2px solid red;*/
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 0;
+	padding: 0;
+	border-bottom: 2px solid #87fe39;
+}
+
+.logo p {
+	margin: 7px;
+	padding: 0 8px;
+	color:white;
+	flex-basis: 300px;
+    font-size: 1.6rem;
+
+}
+
+.logo h4 {
+
+	font-weight: bolder;
+	font-size: 2.4rem;
+	margin: 7px;
+	padding: 0 8px;
+	color: #87fe39;
+	flex-basis: 300px;
+
+}
+
+
+
+section{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+	width: 100%;
+}
+  
+#petitionTitle{
+    color: #87fe39;
+    font-weight: bolder;
+    font-size: xxx-large;
+	text-align: center;
+}
+#reciptent{
+    font-size: 1.3rem;
+    color: yellow;
+    margin: 0;
+}
+#petition_by{
+    font-size: 1.3rem;
+    color: yellow;
+    margin: 0;
+    padding: 0;
+}
+
+#description{
+    width: 70%;
+    font-size: x-large;
+    text-align: justify;
+}
+#description p{
+    margin: 0;
+    padding: 0;
+}
+#link,#signingptn{
+	display: flex;
+	margin:0;
+	width: 70%;
+	flex-direction: row;
+}
+#sign_petition, #copy_link{
+    border:none;
+	border-top-left-radius: 0.5rem;
+	border-bottom-left-radius: 0.5rem;
+    background-color: #87fe39;
+    opacity: 0.8;    
+	width: 35%;	
+	color: white;
+	padding: 0.7rem 0;
+	cursor: pointer;	
+}
+#sign_petition:hover, #copy_link:hover{
+    opacity: 1;
+}
+#link_to_ptn,#total {
+   
+    align-self: center;
+    vertical-align: middle;
+	background-color: blue;
+	width: 100%;
+	text-align: center;
+	padding: 0.7rem 0;
+	font-size: 1.2rem;
+}
+
+
+
+
+
+
+
+
+
+
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4);
+	padding-top: 60px;
+
+}
+
+/*style the model content box*/
+.modal-content {
+	
+	margin: 5% auto 15% auto;
+	border: 1px solid #888;
+	width: 45%;
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	align-items: center;
+	text-align: center;
+	border-radius: 25px;
+	padding: 20px;
+	background-color:black;
+	justify-content: space-between;	
+	border: #87fe39;
+	color: #87fe39;
+}
+
+
+
+.modal-content #SigninGoogle{
+/*	border: 2px solid red;*/
+	width: 80%;
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+	margin-top: 1rem;
+	background-color: #87fe39;
+	color: black;
+
+}
+
+
+
+/* add zoom animation*/
+.animate {
+	-webkit-animation: animatezoom 0.6s;
+	animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+	from {
+		-webkit-transform: scale(0)
+	}
+
+	to {
+		-webkit-transform: scale(1)
+	}
+}
+
+@keyframes animatezoom {
+	from {
+		transform: scale(0)
+	}
+
+	to {
+		transform: scale(1)
+	}
+}
+
+@media screen and (max-width: 300px) {
+	span.psw {
+		display: block;
+		float: none;
+	}
+
+	.cancelbtn {
+		width: 100%;
+	}
+}
+
+/*end*/
+
+
+
+* {box-sizing: border-box}
+
+/* Full-width input fields */
+  input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background:#87fe39;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color:white;
+  outline: none;
+}
+
+hr {
+  border: 1px solid  #87fe39;
+  margin-bottom: 25px;
+  
+}
+
+/* Set a style for all buttons */
+modal-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+} 
+modal-btn:hover{
+	opacity: 1;
+}
+
+
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+  border: 2px solid  #87fe39 ;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .signupbtn {
+    width: 100%;
+  }
+}

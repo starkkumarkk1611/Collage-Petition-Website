@@ -1,0 +1,155 @@
+html,
+body {
+	/*        	border: 2px solid blue;*/
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+
+}
+
+.main {
+	/*        	border: 2px solid black;*/
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	color: white;
+	opacity: 0.899;
+}
+
+header {
+	width: 100%;
+}
+
+header::before {
+	background: url(/static/judge.jpg) repeat center center/cover;
+	content: "";
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	opacity: 0.7;
+
+/*            border: 2px solid red;*/
+}
+
+nav {
+	display: flex;
+	/*        	border: 2px solid red;*/
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 0;
+	padding: 0;
+	
+	border-bottom: 2px solid #87fe39;
+}
+
+.logo p {
+	margin: 7px;
+	padding: 0 8px;
+	color:white;
+	flex-basis: 300px;
+	font-size: 1.6rem;
+
+}
+
+.logo h4 {
+
+	font-weight: bolder;
+	font-size: 2.2rem;
+	margin: 7px;
+	padding: 0 8px;
+	color: #87fe39;
+	flex-basis: 300px;
+
+}
+
+
+
+
+section {
+	/*        	border: 2px solid red;*/
+	display: flex;
+	flex-direction: column;
+
+	width: 80%;
+	
+	align-items: center;
+	text-align: center;
+	align-content: center;
+
+}
+
+section h1 {
+	color: white;
+	text-shadow: 2px 2px 0.5px black;
+	font-size: 2.7rem;
+	padding: 0;
+	margin: 0.8rem;
+	border: 2px solid #87fe39;
+	border-bottom-left-radius: 3rem;
+	border-top-right-radius: 3rem;
+	width: 100%;
+
+}
+
+section p {
+	color: white;
+	font-weight: 500;
+	font-size: 1.6rem;
+
+}
+
+#signin-up{
+	
+	width: 30%;
+    margin: 0.5rem;
+    height: 3rem;
+	background-color: #87fe39;
+	opacity: 0.7;
+	border: none;
+
+}
+#signin-up:hover{
+	cursor: pointer;
+
+	opacity: 1;
+
+}
+
+footer {
+
+	/*        	border: 2px solid red;*/
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	width: 100%;
+	border-top: 2px solid #87fe39;
+	bottom: 0;
+
+	padding-top: 5px;
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 5px;
+	color: #87fe39;
+	font-size: 1.8rem;
+
+
+}
+
+footer a {
+	text-decoration: none;
+	color: white;
+	font-size: 1.8rem;
+}
+
+footer a:hover {
+	text-decoration: none;
+	color: #87fe39;
+}
+
+
+

@@ -1,0 +1,76 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title #{title}
+        style 
+            include ../static/Mainpage.css
+        
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+    body 
+        .main
+            header
+                nav 
+                    .logo
+                        h4 ISMpetition 
+                        p Every Voice Matters 
+                    .userinfo 
+                        p#email #{email} 
+                        button#signout(onclick="window.location.href='/sessionLogout'") Sign Out 
+            section
+                h1 The plateform to change in IIT(ISM) Dhanbad      
+                button#start-petition(onclick="window.location.href='/start-a-petition'") Start Your Petition Now
+            div#link_container
+                hr
+                div#head2 Your Petitions
+                div#filed_ptn 
+            
+              
+            script(src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js") 
+            script(src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js") 
+
+            script 
+                include ../static/firebaseConfig.js 
+            
+            script.                    
+                var id = document.getElementById('email').innerHTML;
+
+                var docRef = db.collection("UsersData").doc(id);
+
+                docRef.get().then((doc) => {
+                    if (!doc.exists) {
+                        document.getElementById('link_container').style.display= 'none';
+                    } 
+                    else 
+                    {
+                        var data = doc.data();
+                        var lnk_str ="";
+                        var l = data.length;
+                        for ( i in data.petition_filed) {
+                            lnk_str += data.petition_filed[i];
+                        }
+                        console.log(lnk_str);
+                        
+                        document.getElementById('filed_ptn').innerHTML = lnk_str; 
+                        document.getElementById('link_container').style.display= 'flex';
+                    }
+                }).catch((error) => {
+                    console.log("Error getting document:", error);
+                    
+                });
+                                    
+            script.
+                function copyToClipboard(element) {
+                    var $temp = $("<input>");
+                    $("body").append($temp);
+                    $temp.val($(element).text()).select();
+                    document.execCommand("copy");
+                    $temp.remove();
+                    var idp = element.slice(1);
+                    var link =  document.getElementById(idp).innerHTML;
+                    document.getElementById(idp).innerHTML = "--Copied--";
+                    setTimeout(() => {  document.getElementById(idp).innerHTML = link; }, 1000);    
+                }
+
